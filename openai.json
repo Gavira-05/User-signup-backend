@@ -1,0 +1,930 @@
+{
+  "api_info": {
+    "title": "Attack Monitor Backend API",
+    "description": "攻击监控系统后端API接口",
+    "version": "1.0.0",
+    "base_url": "http://localhost:16666",
+    "generated_at": "2025-08-14T17:06:11.519641",
+    "generated_by": "FastAPI OpenAPI Utils"
+  },
+  "authentication": {
+    "type": "Bearer Token",
+    "description": "大部分接口需要在请求头中包含Authorization: Bearer <access_token>"
+  },
+  "endpoints": [
+    {
+      "path": "/users/register",
+      "method": "POST",
+      "description": "Register",
+      "tags": [
+        "users"
+      ],
+      "request_body": {
+        "$ref": "#/components/schemas/UserCreate"
+      },
+      "responses": {
+        "201": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/users/login",
+      "method": "POST",
+      "description": "Login",
+      "tags": [
+        "users"
+      ],
+      "request_body": {
+        "$ref": "#/components/schemas/UserLogin"
+      },
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginResponse"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/users/debug-token",
+      "method": "GET",
+      "description": "Debug Token",
+      "tags": [
+        "users"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/verify-token",
+      "method": "GET",
+      "description": "Verify Token",
+      "tags": [
+        "users"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/refresh-token",
+      "method": "POST",
+      "description": "Refresh Token",
+      "tags": [
+        "users"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginResponse"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/me",
+      "method": "GET",
+      "description": "Get Current User Info",
+      "tags": [
+        "users"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/me",
+      "method": "PUT",
+      "description": "Update Current User Info",
+      "tags": [
+        "users"
+      ],
+      "request_body": {
+        "$ref": "#/components/schemas/UserUpdate"
+      },
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/me/password",
+      "method": "PUT",
+      "description": "Change Current User Password",
+      "tags": [
+        "users"
+      ],
+      "request_body": {
+        "$ref": "#/components/schemas/ChangePassword"
+      },
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/{user_id}",
+      "method": "GET",
+      "description": "Get User Info",
+      "tags": [
+        "users"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/{user_id}",
+      "method": "PUT",
+      "description": "Update User Info",
+      "tags": [
+        "users"
+      ],
+      "request_body": {
+        "$ref": "#/components/schemas/UserUpdate"
+      },
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/{user_id}/password",
+      "method": "PUT",
+      "description": "Change Password",
+      "tags": [
+        "users"
+      ],
+      "request_body": {
+        "$ref": "#/components/schemas/ChangePassword"
+      },
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/admin/users",
+      "method": "GET",
+      "description": "Get All Users",
+      "tags": [
+        "users"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserListResponse"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/admin/users",
+      "method": "POST",
+      "description": "Create User By Admin",
+      "tags": [
+        "users"
+      ],
+      "request_body": {
+        "$ref": "#/components/schemas/AdminUserCreate"
+      },
+      "responses": {
+        "201": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/admin/users/{user_id}",
+      "method": "GET",
+      "description": "Get User By Admin",
+      "tags": [
+        "users"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/admin/users/{user_id}",
+      "method": "PUT",
+      "description": "Update User By Admin",
+      "tags": [
+        "users"
+      ],
+      "request_body": {
+        "$ref": "#/components/schemas/AdminUserUpdate"
+      },
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOut"
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    },
+    {
+      "path": "/users/admin/users/{user_id}",
+      "method": "DELETE",
+      "description": "Delete User By Admin",
+      "tags": [
+        "users"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful Response",
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
+        "422": {
+          "description": "Validation Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "OAuth2PasswordBearer": []
+        }
+      ]
+    }
+  ],
+  "data_models": {
+    "AdminUserCreate": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "Username"
+        },
+        "password": {
+          "type": "string",
+          "title": "Password"
+        },
+        "roles": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "title": "Roles",
+          "default": []
+        }
+      },
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "title": "AdminUserCreate",
+      "description": "管理员创建用户时的请求模型"
+    },
+    "AdminUserUpdate": {
+      "properties": {
+        "username": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Username"
+        },
+        "password": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Password"
+        },
+        "is_active": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is Active"
+        },
+        "roles": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Roles"
+        }
+      },
+      "type": "object",
+      "title": "AdminUserUpdate",
+      "description": "管理员更新用户时的请求模型"
+    },
+    "ChangePassword": {
+      "properties": {
+        "old_password": {
+          "type": "string",
+          "title": "Old Password"
+        },
+        "new_password": {
+          "type": "string",
+          "title": "New Password"
+        }
+      },
+      "type": "object",
+      "required": [
+        "old_password",
+        "new_password"
+      ],
+      "title": "ChangePassword"
+    },
+    "HTTPValidationError": {
+      "properties": {
+        "detail": {
+          "items": {
+            "$ref": "#/components/schemas/ValidationError"
+          },
+          "type": "array",
+          "title": "Detail"
+        }
+      },
+      "type": "object",
+      "title": "HTTPValidationError"
+    },
+    "LoginResponse": {
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "title": "Access Token"
+        },
+        "token_type": {
+          "type": "string",
+          "title": "Token Type"
+        },
+        "user": {
+          "$ref": "#/components/schemas/UserOut"
+        }
+      },
+      "type": "object",
+      "required": [
+        "access_token",
+        "token_type",
+        "user"
+      ],
+      "title": "LoginResponse"
+    },
+    "Permission": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description"
+        },
+        "id": {
+          "type": "integer",
+          "title": "Id"
+        },
+        "created_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Created Time"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "id",
+        "created_time"
+      ],
+      "title": "Permission"
+    },
+    "Role": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description"
+        },
+        "id": {
+          "type": "integer",
+          "title": "Id"
+        },
+        "created_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Created Time"
+        },
+        "permissions": {
+          "items": {
+            "$ref": "#/components/schemas/Permission"
+          },
+          "type": "array",
+          "title": "Permissions",
+          "default": []
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "id",
+        "created_time"
+      ],
+      "title": "Role"
+    },
+    "UserCreate": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "Username"
+        },
+        "password": {
+          "type": "string",
+          "title": "Password"
+        }
+      },
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "title": "UserCreate"
+    },
+    "UserListResponse": {
+      "properties": {
+        "users": {
+          "items": {
+            "$ref": "#/components/schemas/UserOut"
+          },
+          "type": "array",
+          "title": "Users"
+        },
+        "total": {
+          "type": "integer",
+          "title": "Total"
+        },
+        "skip": {
+          "type": "integer",
+          "title": "Skip"
+        },
+        "limit": {
+          "type": "integer",
+          "title": "Limit"
+        }
+      },
+      "type": "object",
+      "required": [
+        "users",
+        "total",
+        "skip",
+        "limit"
+      ],
+      "title": "UserListResponse"
+    },
+    "UserLogin": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "Username"
+        },
+        "password": {
+          "type": "string",
+          "title": "Password"
+        }
+      },
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "title": "UserLogin"
+    },
+    "UserOut": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "Username"
+        },
+        "id": {
+          "type": "string",
+          "title": "Id"
+        },
+        "is_active": {
+          "type": "boolean",
+          "title": "Is Active"
+        },
+        "created_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Created Time"
+        },
+        "roles": {
+          "items": {
+            "$ref": "#/components/schemas/Role"
+          },
+          "type": "array",
+          "title": "Roles",
+          "default": []
+        }
+      },
+      "type": "object",
+      "required": [
+        "username",
+        "id",
+        "is_active",
+        "created_time"
+      ],
+      "title": "UserOut"
+    },
+    "UserUpdate": {
+      "properties": {
+        "username": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Username"
+        }
+      },
+      "type": "object",
+      "title": "UserUpdate"
+    },
+    "ValidationError": {
+      "properties": {
+        "loc": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "type": "array",
+          "title": "Location"
+        },
+        "msg": {
+          "type": "string",
+          "title": "Message"
+        },
+        "type": {
+          "type": "string",
+          "title": "Error Type"
+        }
+      },
+      "type": "object",
+      "required": [
+        "loc",
+        "msg",
+        "type"
+      ],
+      "title": "ValidationError"
+    }
+  },
+  "error_responses": {
+    "400": "Bad Request - 请求参数错误",
+    "401": "Unauthorized - 未授权访问",
+    "403": "Forbidden - 权限不足",
+    "404": "Not Found - 资源不存在",
+    "409": "Conflict - 资源冲突（如用户名已存在）",
+    "500": "Internal Server Error - 服务器内部错误"
+  },
+  "usage_examples": {
+    "login": {
+      "description": "用户登录示例",
+      "curl": "curl -X POST 'http://localhost:16666/users/login' -H 'Content-Type: application/json' -d '{\"username\": \"testuser\", \"password\": \"password123\"}'",
+      "javascript": "fetch('http://localhost:16666/users/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: 'testuser', password: 'password123' }) })"
+    },
+    "get_user_info": {
+      "description": "获取用户信息示例",
+      "curl": "curl -X GET 'http://localhost:16666/users/me' -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'",
+      "javascript": "fetch('http://localhost:16666/users/me', { headers: { 'Authorization': 'Bearer YOUR_ACCESS_TOKEN' } })"
+    }
+  }
+}
