@@ -12,7 +12,7 @@ dependencies = [
     "pydantic==2.5.0",
     "pydantic[email]==2.5.0",
     "python-jose[cryptography]==3.3.0",
-    "passlib[bcrypt]==1.7.4",
+    "passlib[bcrypt]==1.7.5",
     "python-multipart==0.0.6",
 ]
 requires-python = ">=3.8"
@@ -44,4 +44,5 @@ line_length = 88
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+
 python_files = ["test_*.py", "*_test.py"]
