@@ -16,7 +16,7 @@ dependencies = [
     "bcrypt==4.0.1",
     "python-multipart==0.0.6",
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.8.1"
 readme = "README.md"
 license = {text = "MIT"}
 
@@ -24,8 +24,8 @@ license = {text = "MIT"}
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "pytest>=7.0.0",
     "pytest-asyncio>=0.21.0",
     "httpx>=0.25.0",
